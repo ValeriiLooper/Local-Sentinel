@@ -1,0 +1,94 @@
+Инструкция по запуску: Локальный часовой (Local Sentinel)
+Где всё лежит
+Все файлы должны находиться строго в одной папке: C:\LocalSentinel\. Это важно, чтобы скрипты видели одну и ту же базу данных и конфиги.
+
+Шаг 1: Готовим инструменты
+Для начала убедись, что у тебя стоит Python (версия 3.10 или выше).
+
+Открой командную строку (CMD).
+
+Зайди в папку: cd C:\LocalSentinel.
+
+Установи библиотеки: pip install -r requirements.txt.
+
+Шаг 2: Настраиваем «мозги» проекта (.env)
+Открой файл .env блокнотом. Тебе нужно заполнить поля, где стоят тильды ~~~.
+
+API_ID и HASH берем с официального сайта Телеграм.
+
+MODERATOR_BOT_TOKEN — это бот, который будет писать тебе.
+
+PUBLISHER_BOT_TOKEN — это бот, который будет постить в твой канал.
+
+ADMIN_ID — твой личный ID, чтобы бот слушался только тебя.
+
+Шаг 3: Как это работает на деле
+Система состоит из двух частей, которые работают одновременно:
+
+Сборщик (Collector): Сидит тихо, «слушает» 40 каналов. Если видит ключевое слово — проверяет, не забанен ли автор и не дубликат ли это. Если всё ок — кидает в базу.
+
+Модератор: Проверяет базу каждые 5 секунд. Если там что-то появилось — присылает тебе карточку с кнопками.
+
+Шаг 4: Запуск (Важно!)
+Тебе нужно открыть два окна терминала.
+
+В первом окне запускаешь «уши»: python collector.py.
+
+В первый раз он попросит телефон и код из ТГ. Вводи смело — создастся файл сессии.
+
+Во втором окне запускаешь интерфейс: python moderator.py.
+
+Кнопки управления
+Post — улетает в канал через второго бота.
+
+Edit — если нажмешь, просто пришли боту исправленный текст следующим сообщением.
+
+Ban Author — полезная штука. Больше от этого человека ты ничего не увидишь, бот будет его игнорировать автоматически.
+
+🇺🇸 Setup Guide: Local Sentinel Manual
+Project Location
+Keep everything in one place: C:\LocalSentinel\. The scripts are hardcoded to look for the database and configs in this specific directory to avoid path errors.
+
+Step 1: Prep the Environment
+Make sure Python 3.10+ is installed on your machine.
+
+Open your terminal (CMD or PowerShell).
+
+Navigate to the folder: cd C:\LocalSentinel.
+
+Install the gear: pip install -r requirements.txt.
+
+Step 2: Configure the Core (.env)
+Open the .env file with any text editor. Look for the ~~~ marks and swap them with your real data.
+
+API_ID & HASH: Get these from the Telegram dev portal.
+
+BOT_TOKENS: You need two separate bots from @BotFather (one for you, one for the channel).
+
+ADMIN_ID: Your numerical ID so the bot knows you are the boss.
+
+Step 3: The Inner Logic
+The system is a two-engine machine:
+
+The Collector: Stays in the shadows and monitors your 40 sources. It filters out banned users and duplicates instantly. If it finds a match, it logs it to the SQLite DB.
+
+The Moderator: A bot interface that polls the DB every 5 seconds and sends "Pending" posts to your private chat.
+
+Step 4: Ignition (How to start)
+You must run two terminal windows simultaneously:
+
+Window 1: Start the listener: python collector.py.
+
+First time only: It will ask for your phone number and TG code to create the session file.
+
+Window 2: Start the UI: python moderator.py.
+
+Management Controls
+Post: Confirms the message and sends it to the target channel.
+
+Edit: Hit this, then just reply to the bot with the corrected text.
+
+Ban Author: Nukes the user from your feed. Their ID goes straight to the blacklist, and you'll never see their spam again.
+---
+
+**Система полностью готова к локальному развертыванию.** Удачи в запуске твоего первого этапа архитектуры!
