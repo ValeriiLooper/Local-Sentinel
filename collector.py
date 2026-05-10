@@ -1,4 +1,5 @@
 import logging
+import os
 from telethon import TelegramClient, events
 from datetime import datetime, timezone
 from config import API_ID, API_HASH, SESSION_NAME, SOURCE_CHANNELS, KEYWORDS, STOP_WORDS, IGNORE_OLD_MESSAGES
@@ -9,7 +10,7 @@ logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler(r"C:\LocalSentinel\logs_collector.txt"),
+        logging.FileHandler(os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs_collector.txt")),
         logging.StreamHandler()
     ]
 )

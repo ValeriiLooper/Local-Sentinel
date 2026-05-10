@@ -1,9 +1,8 @@
 import os
 from dotenv import load_dotenv
 
-# Set working directory
-BASE_DIR = r"C:\LocalSentinel"
-os.chdir(BASE_DIR)
+# Set project directory
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 load_dotenv(os.path.join(BASE_DIR, ".env"))
 

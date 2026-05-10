@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+*.db
+*.session
+*.env
+logs_collector.txt
